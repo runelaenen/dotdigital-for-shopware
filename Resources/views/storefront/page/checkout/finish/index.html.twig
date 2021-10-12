@@ -1,0 +1,19 @@
+{% sw_extends '@Storefront/storefront/page/checkout/finish/index.html.twig' %}
+
+{% set lineItems = [] %}
+{% for lineItem in page.order.lineItems %}
+    {% set lineItems = lineItems|merge([lineItem.label]) %}
+{% endfor %}
+
+{% set roiPluginData = {
+    lineItems: lineItems,
+    total: page.order.amountTotal
+} %}
+
+{% block page_checkout_main_content %}
+    {{ parent() }}
+
+    {% if config('DotdigitalForShopware.config.siteRoiTrackingEnabled') %}
+        <template data-roi-plugin data-roi-plugin-options='{{ roiPluginData|json_encode }}'></template>
+    {% endif %}
+{% endblock %}

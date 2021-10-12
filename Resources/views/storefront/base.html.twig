@@ -1,0 +1,9 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    {% if config('DotdigitalForShopware.config.siteRoiTrackingEnabled') %}
+        <script src="//r{{ config('DotdigitalForShopware.config.region') | default('1') }}-t.trackedlink.net/_dmpt.js"></script>
+    {% endif %}
+{% endblock %}

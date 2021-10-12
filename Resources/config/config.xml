@@ -3,6 +3,31 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
     <card>
         <title>Tracking</title>
+
+        <input-field type="checkbox">
+            <name>siteRoiTrackingEnabled</name>
+            <label>Enable site and ROI tracking</label>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>region</name>
+            <label>Select region</label>
+            <options>
+                <option>
+                    <id>1</id>
+                    <name>Region 1</name>
+                </option>
+                <option>
+                    <id>2</id>
+                    <name>Region 2</name>
+                </option>
+                <option>
+                    <id>3</id>
+                    <name>Region 3</name>
+                </option>
+            </options>
+        </input-field>
+
         <input-field type="text">
             <name>wbtProfileId</name>
             <label>Web behavior tracking profile ID</label>

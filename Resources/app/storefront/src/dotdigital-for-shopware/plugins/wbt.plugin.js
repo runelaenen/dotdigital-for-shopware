@@ -6,7 +6,7 @@ export default class WbtPlugin extends Plugin {
          * Web behavior tracking profile ID
          * @type string
          */
-        profileId: ''
+        profileId: '',
     };
 
     init() {
