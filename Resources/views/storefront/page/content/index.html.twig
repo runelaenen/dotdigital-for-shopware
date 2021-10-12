@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/page/content/index.html.twig' %}
+
+{% block base_main_inner %}
+    {{ parent() }}
+
+    {% if config('DotdigitalForShopware.config.wbtProfileId') %}
+        {% set wbtPluginOptions = {
+            profileId: config('DotdigitalForShopware.config.wbtProfileId')
+        } %}
+        <template data-wbt-plugin data-wbt-plugin-options='{{ wbtPluginOptions|json_encode }}'></template>
+    {% endif %}
+{% endblock %}
