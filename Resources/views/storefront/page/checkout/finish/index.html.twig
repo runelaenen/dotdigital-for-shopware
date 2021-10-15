@@ -17,3 +17,11 @@
         <template data-roi-plugin data-roi-plugin-options='{{ roiPluginData|json_encode }}'></template>
     {% endif %}
 {% endblock %}
+
+{% block base_body_script %}
+    {{ parent() }}
+
+    {% sw_include '@DotdigitalForShopware/storefront/component/cart-insight.html.twig' with {
+        param_cart_phase: 'ORDER_COMPLETE'
+    } %}
+{% endblock %}

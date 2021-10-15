@@ -33,4 +33,28 @@
             <label>Web behavior tracking profile ID</label>
         </input-field>
     </card>
+
+    <card>
+        <title>Abandoned carts</title>
+
+        <input-field type="checkbox">
+            <name>acEnabled</name>
+            <label>Enable abandoned cart</label>
+        </input-field>
+
+        <input-field type="text">
+            <name>acProgramId</name>
+            <label>Abandoned cart program ID</label>
+        </input-field>
+
+        <input-field type="int">
+            <name>acDelay</name>
+            <label>Allow abandoned cart delay (minutes)</label>
+        </input-field>
+
+        <input-field type="checkbox">
+            <name>acAllowNonSubscribers</name>
+            <label>Allow abandoned cart for non-subscribed contacts</label>
+        </input-field>
+    </card>
 </config>

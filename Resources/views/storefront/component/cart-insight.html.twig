@@ -1,0 +1,84 @@
+{% set cartPhase = param_cart_phase|default('CUSTOMER_LOGIN') %}
+{% set wbtProfileId = config('DotdigitalForShopware.config.wbtProfileId') %}
+{% set hasCorrectConfig = wbtProfileId and config('DotdigitalForShopware.config.acEnabled') and config('DotdigitalForShopware.config.acProgramId') %}
+
+{# Subscribers only #}
+{% set canSendToCurrentUser = (config('DotdigitalForShopware.config.acAllowNonSubscribers') == false and context.customer is not empty and context.customer.newsletter == false) ? false : true %}
+
+{% set canSendCartInsight = hasCorrectConfig and canSendToCurrentUser %}
+
+{% if canSendCartInsight %}
+
+    {% set payloadData = {
+        customer_email: context.customer.email | default(''),
+        program_id: config('DotdigitalForShopware.config.acProgramId'),
+        cart_delay: config('DotdigitalForShopware.config.acDelay'),
+        currency: context.currency.isoCode | default(''),
+        cart_url: app.request.schemeAndHttpHost ~ app.request.baseUrl ~ path('frontend.checkout.cart.page') | default(''),
+        cart_phase: cartPhase
+    } %}
+
+    {% if cartPhase == 'ORDER_COMPLETE' %}
+
+        {% set cartObject = page.order %}
+
+        {# process line items to build product payload and calculate discount #}
+        {% set discountTotal = 0 %}
+        {% set processedLineItems = [] %}
+
+        {% for lineItem in cartObject.lineItems %}
+            {% if lineItem.type == "promotion" %}
+                {% set discountTotal = discountTotal + lineItem.price.totalPrice %}
+            {% else %}
+                {# If there is a list price, and list price is greater than the unit price, use that #}
+                {% set unitPrice = lineItem.price.listPrice and lineItem.price.listPrice.price > lineItem.price.unitPrice ?
+                    lineItem.price.listPrice.price :
+                    lineItem.price.unitPrice
+                %}
+
+                {% set productData = {
+                    sku: lineItem.payload.productNumber,
+                    name: lineItem.label,
+                    description: lineItem.description | default(''),
+                    quantity: lineItem.quantity,
+                    unit_price: unitPrice,
+                    sale_price: lineItem.price.unitPrice,
+                    total_price: lineItem.price.totalPrice,
+                    image_url: lineItem.cover.url,
+                    product_url: seoUrl('frontend.detail.page', { productId: lineItem.id })
+                } %}
+                {% set processedLineItems = processedLineItems|merge([productData]) %}
+            {% endif %}
+        {% endfor %}
+
+        {# calculate tax #}
+        {% set taxTotal = 0 %}
+        {% for item in cartObject.price.calculatedTaxes %}
+            {% set taxTotal = taxTotal + item.tax %}
+        {% endfor %}
+
+        {# calculate shipping #}
+        {% set shippingTotal = 0 %}
+        {% for item in cartObject.deliveries %}
+            {% set shippingTotal = shippingTotal + item.shippingCosts.totalPrice %}
+        {% endfor %}
+
+        {% set payloadData = payloadData|merge({
+            cart_id: page.order.orderNumber,
+            subtotal: cartObject.price.netPrice | default(0),
+            shipping: shippingTotal,
+            discount_amount: discountTotal,
+            tax_amount: taxTotal,
+            grand_total: cartObject.price.totalPrice | default(0),
+            line_items: processedLineItems
+        }) %}
+
+    {% endif %}
+
+    {% set cartInsightHandlerPluginOptions = {
+        data: payloadData
+    } %}
+
+    <template data-cart-insight-handler-plugin data-cart-insight-handler-plugin-options='{{ cartInsightHandlerPluginOptions|json_encode }}'></template>
+
+{% endif %}

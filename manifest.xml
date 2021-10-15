@@ -2,10 +2,10 @@
 <manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/Framework/App/Manifest/Schema/manifest-1.0.xsd">
     <meta>
         <name>DotdigitalForShopware</name>
-        <label>dotdigital for Shopware</label>
-        <description>Connect your Shopware store to dotdigital.</description>
-        <author>dotdigital</author>
-        <copyright>dotdigital</copyright>
+        <label>Dotdigital for Shopware</label>
+        <description>Connect your Shopware store to Dotdigital.</description>
+        <author>Dotdigital</author>
+        <copyright>Dotdigital</copyright>
         <version>1.0.0</version>
         <icon>Resources/config/icon.png</icon>
         <license>MIT</license>
