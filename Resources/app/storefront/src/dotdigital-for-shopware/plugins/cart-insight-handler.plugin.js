@@ -98,7 +98,6 @@ export default class CartInsightHandlerPlugin extends Plugin {
     }
 
     getProductUrl(product) {
-        const bits = product.label.split(' ');
-        return location.protocol + '//' + location.host + '/' + bits.join('-') + '/' + product.payload.productNumber;
+        return location.protocol + '//' + location.host + '/detail/' + product.id;
     }
 }

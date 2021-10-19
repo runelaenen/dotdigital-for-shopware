@@ -45,7 +45,7 @@
                     sale_price: lineItem.price.unitPrice,
                     total_price: lineItem.price.totalPrice,
                     image_url: lineItem.cover.url,
-                    product_url: seoUrl('frontend.detail.page', { productId: lineItem.id })
+                    product_url: seoUrl('frontend.detail.page', { productId: lineItem.productId })
                 } %}
                 {% set processedLineItems = processedLineItems|merge([productData]) %}
             {% endif %}
