@@ -6,7 +6,7 @@
         <description>Connect your Shopware store to Dotdigital.</description>
         <author>Dotdigital</author>
         <copyright>Dotdigital</copyright>
-        <version>1.0.0-RC1</version>
+        <version>1.0.0</version>
         <icon>Resources/config/icon.png</icon>
         <license>MIT</license>
     </meta>
