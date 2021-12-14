@@ -20,9 +20,9 @@ function eventCallback(updatedCookies) {
 }
 
 function removeAllDotdigitalCookies() {
-    Object.keys(DotdigitalCookies).map(key => {
-        CookieStorage.removeItem(DotdigitalCookies[key]);
-    })
+    Object.keys(DotdigitalCookies).forEach(key =>
+        CookieStorage.removeItem(DotdigitalCookies[key])
+    );
 }
 
 
