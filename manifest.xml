@@ -10,4 +10,29 @@
         <icon>Resources/config/icon.png</icon>
         <license>MIT</license>
     </meta>
+    <cookies>
+        <group>
+            <snippet-name>dotdigital.cookie.groupName</snippet-name>
+            <snippet-description>dotdigital.cookie.groupDescription</snippet-description>
+            <entries>
+                <cookie>
+                    <cookie>dd-tracking-enabled</cookie>
+                    <snippet-name>dotdigital.cookie.ddEnabledCookieName</snippet-name>
+                    <snippet-description>dotdigital.cookie.ddEnabledCookieDescription</snippet-description>
+                    <value>1</value>
+                    <expiration>90</expiration>
+                </cookie>
+                <cookie>
+                    <cookie>dmSessionID</cookie>
+                    <snippet-name>dotdigital.cookie.ddSessionCookieName</snippet-name>
+                    <snippet-description>dotdigital.cookie.ddSessionCookieDescription</snippet-description>
+                </cookie>
+                <cookie>
+                    <cookie>dm_i</cookie>
+                    <snippet-name>dotdigital.cookie.ddTrackingCookieName</snippet-name>
+                    <snippet-description>dotdigital.cookie.ddTrackingCookieDescription</snippet-description>
+                </cookie>
+            </entries>
+        </group>
+    </cookies>
 </manifest>

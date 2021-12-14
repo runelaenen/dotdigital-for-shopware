@@ -1,11 +1,15 @@
 import Plugin from 'src/plugin-system/plugin.class';
 import StoreApiClient from 'src/service/store-api-client.service';
-import CartInsight from '../../dotdigital-for-shopware/cart-insight';
+import CartInsight from '../cart-insight';
 
 export default class CartInsightHandlerPlugin extends Plugin {
     static options = {}
 
     init() {
+        if (typeof window.dmPt === 'undefined') {
+            return;
+        }
+
         this._cartInsight = new CartInsight();
         this._client = new StoreApiClient();
 

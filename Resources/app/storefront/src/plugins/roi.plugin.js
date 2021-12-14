@@ -15,6 +15,10 @@ export default class RoiPlugin extends Plugin {
     };
 
     init() {
+        if (typeof window._dmTrack === 'undefined') {
+            return;
+        }
+
         if (this.options) {
             const lineItemCount = this.options.lineItems.length;
             let i = 0;

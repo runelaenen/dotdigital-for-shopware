@@ -1,0 +1,17 @@
+{% if config('DotdigitalForShopware.config.siteRoiTrackingEnabled') %}
+    <div id="ddTrackedLink" data-src="//r{{ config('DotdigitalForShopware.config.region') | default('1') }}-t.trackedlink.net/_dmpt.js"><!-- Dotdigital cookies must be accepted for the tracking script to load --></div>
+    <script>{% verbatim %}
+        function getCookie(name) {
+            const cookieMatch = document.cookie.match(name + '=(.*?)(;|$)');
+            return cookieMatch && decodeURI(cookieMatch[1]);
+        }
+
+        const ddTrackingEnabled = getCookie('dd-tracking-enabled');
+        if (ddTrackingEnabled) {
+            const trackingDiv = document.getElementById('ddTrackedLink');
+            const trackingScript = document.createElement('script');
+            trackingScript.src = trackingDiv.dataset.src;
+            trackingDiv.replaceWith(trackingScript);
+        }{% endverbatim %}
+    </script>
+{% endif %}

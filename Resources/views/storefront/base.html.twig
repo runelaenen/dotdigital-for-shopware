@@ -36,8 +36,5 @@
     <template data-identify-plugin></template>
 
     {% sw_include '@DotdigitalForShopware/storefront/component/cart-insight.html.twig' %}
-
-    {% if config('DotdigitalForShopware.config.siteRoiTrackingEnabled') %}
-        <script src="//r{{ config('DotdigitalForShopware.config.region') | default('1') }}-t.trackedlink.net/_dmpt.js"></script>
-    {% endif %}
+    {% sw_include '@DotdigitalForShopware/storefront/component/site-roi-tracking.html.twig' %}
 {% endblock %}

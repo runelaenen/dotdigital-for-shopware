@@ -1,0 +1,14 @@
+{
+    "dotdigital": {
+        "cookie": {
+            "groupName": "Marketing",
+            "groupDescription": "Marketing cookies used to track visitors across the store to provide personalization, offers and promotions.",
+            "ddEnabledCookieName": "Dotdigital",
+            "ddEnabledCookieDescription": "This cookie is required for the correct functioning of the Dotdigital app.",
+            "ddSessionCookieName": "Dotdigital session",
+            "ddSessionCookieDescription": "This cookie tracks and identifies a visitor as a Dotdigital contact whilst they browse your store’s pages.",
+            "ddTrackingCookieName": "Dotdigital tracking",
+            "ddTrackingCookieDescription": "This cookie is placed when a contact clicks a tracked link in a Dotdigital campaign and returns to your store."
+        }
+    }
+}

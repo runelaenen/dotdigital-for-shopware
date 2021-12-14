@@ -1,0 +1,14 @@
+{
+    "dotdigital": {
+        "cookie": {
+            "groupName": "Marketing",
+            "groupDescription": "Marketing Cookies dienen dazu Werbeanzeigen auf der Webseite zielgerichtet und individuell über mehrere Seitenaufrufe und Browsersitzungen zu schalten.",
+            "ddEnabledCookieName": "Dotdigital",
+            "ddEnabledCookieDescription": "Dieses Cookie ist für das korrekte Funktionieren der Dotdigital-App erforderlich.",
+            "ddSessionCookieName": "Dotdigital session",
+            "ddSessionCookieDescription": "Dieses Cookie tracked und identifiziert einen Besucher als Dotdigital-Kontakt, während er die Seiten Ihres Shops besucht.",
+            "ddTrackingCookieName": "Dotdigital tracking",
+            "ddTrackingCookieDescription": "Dieses Cookie wird gesetzt, wenn ein Kontakt auf einen messbaren Link in einer Dotdigital-Kampagne klickt und zu Ihrem Shop zurückkehrt."
+        }
+    }
+}
