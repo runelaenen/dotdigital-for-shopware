@@ -1,5 +1,5 @@
 import Plugin from 'src/plugin-system/plugin.class';
-import StoreApiClient from 'src/service/store-api-client.service';
+import HttpClient from 'src/service/http-client.service';
 import CartInsight from '../cart-insight';
 
 export default class CartInsightHandlerPlugin extends Plugin {
@@ -11,7 +11,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
         }
 
         this._cartInsight = new CartInsight();
-        this._client = new StoreApiClient();
+        this._client = new HttpClient();
 
         if (this.options.data) {
             const cartPhase = this.options.data.cart_phase;
@@ -24,7 +24,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
     }
 
     getCart() {
-        this._client.get('/store-api/checkout/cart', this.handleData.bind(this));
+        this._client.get('/checkout/cart.json', this.handleData.bind(this));
     }
 
     handleData(response) {
