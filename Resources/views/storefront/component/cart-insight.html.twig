@@ -19,7 +19,7 @@
     } %}
 
     {% if cartPhase == 'ORDER_COMPLETE' %}
-
+        {% set payloadData = payloadData|merge({cart_delay:0}) %}
         {% set cartObject = page.order %}
 
         {# process line items to build product payload and calculate discount #}
