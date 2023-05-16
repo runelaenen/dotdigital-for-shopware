@@ -21,15 +21,34 @@ export default class CartInsightHandlerPlugin extends Plugin {
                 this.getCart();
             }
         }
+
+        if (document.querySelector('[data-offcanvas-cart]')) {
+            const plugin = window.PluginManager.getPluginInstanceFromElement(
+                document.querySelector('[data-offcanvas-cart]'),
+                'OffCanvasCart'
+            );
+            plugin.$emitter.subscribe(
+                'onRemoveProductFromCart',
+                () => this.cartPreviouslyHadItems = true
+            );
+        }
     }
 
     getCart() {
-        this._client.get('/checkout/cart.json', this.handleData.bind(this));
+        this._client.get('/checkout/cart.json', (response) => {
+            const cart = JSON.parse(response);
+            if (cart.lineItems.length || this.cartPreviouslyHadItems) {
+                this.handleData(cart);
+            }
+        });
     }
 
-    handleData(response) {
-        const cart = JSON.parse(response);
+    handleData(cart) {
         const payload = this.options.data;
+
+        if (!cart.lineItems.length) {
+            payload.cart_delay = 0;
+        }
 
         payload.cart_id = cart.token;
         payload.subtotal = cart.price.netPrice;
@@ -103,5 +122,13 @@ export default class CartInsightHandlerPlugin extends Plugin {
 
     getProductUrl(product) {
         return location.protocol + '//' + location.host + '/detail/' + product.id;
+    }
+
+    get cartPreviouslyHadItems() {
+        return sessionStorage.getItem('cartPreviouslyHadItems') ?? null;
+    }
+    
+    set cartPreviouslyHadItems(value) {
+        sessionStorage.setItem('cartPreviouslyHadItems', value);
     }
 }
