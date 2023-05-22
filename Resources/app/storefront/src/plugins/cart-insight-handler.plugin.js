@@ -29,7 +29,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
             );
             plugin.$emitter.subscribe(
                 'onRemoveProductFromCart',
-                () => this.cartPreviouslyHadItems = true
+                () => this.setCartPreviouslyHadItems(true)
             );
         }
     }
@@ -37,7 +37,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
     getCart() {
         this._client.get('/checkout/cart.json', (response) => {
             const cart = JSON.parse(response);
-            if (cart.lineItems.length || this.cartPreviouslyHadItems) {
+            if (cart.lineItems.length || window.cartPreviouslyHadItems) {
                 this.handleData(cart);
             }
         });
@@ -124,11 +124,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
         return location.protocol + '//' + location.host + '/detail/' + product.id;
     }
 
-    get cartPreviouslyHadItems() {
-        return sessionStorage.getItem('cartPreviouslyHadItems') ?? null;
-    }
-    
-    set cartPreviouslyHadItems(value) {
-        sessionStorage.setItem('cartPreviouslyHadItems', value);
+    setCartPreviouslyHadItems(value) {
+        window.cartPreviouslyHadItems = value;
     }
 }
