@@ -4,7 +4,7 @@ Dotdigital for Shopware is now available for Shopware merchants.
 
 ## Requirements
 - Shopware 6.5+
-    - Shopware 6.4.x is compatible up with the app's 1.x release line.
+    - Shopware 6.4.x is compatible with the app's 1.x release line.
 
 ## Installation
 
