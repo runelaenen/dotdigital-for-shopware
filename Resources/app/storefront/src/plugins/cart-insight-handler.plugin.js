@@ -35,7 +35,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
     }
 
     getCart() {
-        this._client.get('/checkout/cart.json', (response) => {
+        this._client.get(window.router['frontend.checkout.cart.json'], (response) => {
             const cart = JSON.parse(response);
             if (cart.lineItems.length || window.cartPreviouslyHadItems) {
                 this.handleData(cart);
