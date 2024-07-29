@@ -8,7 +8,6 @@
 {% set canSendCartInsight = hasCorrectConfig and canSendToCurrentUser %}
 
 {% if canSendCartInsight %}
-
     {% set payloadData = {
         customer_email: context.customer.email | default(''),
         program_id: config('DotdigitalForShopware.config.acProgramId'),
@@ -51,6 +50,7 @@
                     image_url: lineItem.cover.url,
                     product_url: seoUrl('frontend.detail.page', { productId: lineItem.productId ?? lineItem.referencedId })
                 } %}
+
                 {% set processedLineItems = processedLineItems|merge([productData]) %}
             {% endif %}
         {% endfor %}
@@ -82,6 +82,7 @@
         data: payloadData
     } %}
 
-    <template data-cart-insight-handler-plugin data-cart-insight-handler-plugin-options='{{ cartInsightHandlerPluginOptions|json_encode }}'></template>
-
+    {% block cart_insight_handler_plugin_element %}
+        <template data-cart-insight-handler-plugin data-cart-insight-handler-plugin-options='{{ cartInsightHandlerPluginOptions|json_encode }}'></template>
+    {% endblock %}
 {% endif %}
