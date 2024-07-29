@@ -6,7 +6,15 @@ export default class CartInsightHandlerPlugin extends Plugin {
     static options = {}
 
     init() {
+        this._init();
+    }
+
+    _init(retries = 0) {
         if (typeof window.dmPt === 'undefined') {
+            if (retries < 10) {
+                setTimeout(this._init.bind(this, retries + 1), 100 * retries);
+            }
+
             return;
         }
 
@@ -15,7 +23,7 @@ export default class CartInsightHandlerPlugin extends Plugin {
 
         if (this.options.data) {
             const cartPhase = this.options.data.cart_phase;
-            if (cartPhase === 'ORDER_COMPLETE') {
+            if (cartPhase === 'ORDER_COMPLETE' || cartPhase === 'CART_INFO') {
                 this._cartInsight.init(this.options.data);
             } else {
                 this.getCart();
@@ -32,6 +40,10 @@ export default class CartInsightHandlerPlugin extends Plugin {
                 () => this.setCartPreviouslyHadItems(true)
             );
         }
+    }
+
+    update() {
+        this._init();
     }
 
     getCart() {

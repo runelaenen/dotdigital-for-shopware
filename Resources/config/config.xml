@@ -56,5 +56,20 @@
             <name>acAllowNonSubscribers</name>
             <label>Allow abandoned cart for non-subscribed contacts</label>
         </input-field>
+
+        <input-field type="single-select">
+            <name>acInsightsMethod</name>
+            <label>Cart Insights collection method</label>
+            <options>
+                <option>
+                    <id>cart_info</id>
+                    <name>Cart Info</name>
+                </option>
+                <option>
+                    <id>cart_json</id>
+                    <name>Cart.json</name>
+                </option>
+            </options>
+        </input-field>
     </card>
 </config>

@@ -35,6 +35,8 @@
     {# Identify guests onBlur #}
     <template data-identify-plugin></template>
 
-    {% sw_include '@DotdigitalForShopware/storefront/component/cart-insight.html.twig' %}
+    {% if config('DotdigitalForShopware.config.acInsightsMethod') == 'cart_json' %}
+        {% sw_include '@DotdigitalForShopware/storefront/component/cart-insight.html.twig' %}
+    {% endif %}
     {% sw_include '@DotdigitalForShopware/storefront/component/site-roi-tracking.html.twig' %}
 {% endblock %}
