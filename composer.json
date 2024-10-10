@@ -1,5 +1,5 @@
 {
   "name": "store.shopware.com/dotdigitalforshopware",
   "description": "DotDigital for Shopware 6",
-  "type": "shopware-platform-app"
+  "type": "shopware-app"
 }
